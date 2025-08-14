@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Weather - Smart HRMS</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="js/main.js"></script>
+  <script defer src="js/weather.js"></script>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm fixed-top">
+  <div class="container-fluid">
+    <button class="btn btn-outline-light me-2 d-lg-none" id="sidebarToggle"><i class="bi bi-list"></i></button>
+    <a class="navbar-brand fw-bold" href="index.html"><i class="bi bi-speedometer2 me-2"></i>Smart HRMS</a>
+
+    <!-- Navigation Tabs -->
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" href="employees.html">Employees</a></li>
+        <li class="nav-item"><a class="nav-link" href="resume.html">Resume Parser</a></li>
+        <li class="nav-item"><a class="nav-link active" href="weather.html">Weather</a></li>
+        <li class="nav-item"><a class="nav-link" href="reports.html">Reports</a></li>
+      </ul>
+
+      <!-- Global Search -->
+      <form class="d-flex me-3">
+        <input class="form-control form-control-sm" type="search" placeholder="Search..." aria-label="Search">
+      </form>
+
+      <!-- Role Switcher -->
+      <div class="dropdown me-2">
+        <button class="btn btn-outline-light dropdown-toggle" type="button" id="roleDropdown" data-bs-toggle="dropdown">
+          <span id="currentRole">Loading...</span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item role-select" data-role="Admin">Admin</a></li>
+          <li><a class="dropdown-item role-select" data-role="HR">HR</a></li>
+          <li><a class="dropdown-item role-select" data-role="Employee">Employee</a></li>
+        </ul>
+      </div>
+
+      <!-- Light/dark mode Toggle -->
+      <button class="btn btn-outline-light btn-sm rounded-circle" id="themeToggle" title="Toggle Theme">
+        <i class="bi bi-moon-stars"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="app-container">
+  <!-- Sidebar -->
+  <aside class="app-sidebar shadow-sm" id="sidebarMenu">
+    <div class="p-3">
+      <!-- Collapsible Sections -->
+     <div class="mt-3">
+  <button class="btn btn-sidebar w-100 text-start" data-bs-toggle="collapse" data-bs-target="#reportsMenu">
+    <i class="bi bi-folder2-open me-2"></i>Reports
+  </button>
+  <div class="collapse" id="reportsMenu">
+    <a href="#" id="btnMonthly" class="btn btn-sm btn-light w-100 mt-1">Monthly</a>
+    <a href="#" id="btnYearly" class="btn btn-sm btn-light w-100 mt-1">Yearly</a>
+  </div>
+</div>
+
+      <div class="mt-3">
+        <button class="btn btn-sidebar w-100 text-start" data-bs-toggle="collapse" data-bs-target="#settingsMenu">
+          <i class="bi bi-gear-fill me-2"></i>Settings
+        </button>
+        <div class="collapse" id="settingsMenu">
+          <a href="#" class="btn btn-sm btn-light w-100 mt-1">Profile</a>
+          <a href="#" class="btn btn-sm btn-light w-100 mt-1">Preferences</a>
+        </div>
+      </div>
+
+      <div class="mt-3">
+        <button class="btn btn-sidebar w-100 text-start" data-bs-toggle="collapse" data-bs-target="#helpMenu">
+          <i class="bi bi-question-circle-fill me-2"></i>Help
+        </button>
+        <div class="collapse" id="helpMenu">
+          <a href="#" class="btn btn-sm btn-light w-100 mt-1">Documentation</a>
+          <a href="#" class="btn btn-sm btn-light w-100 mt-1">Support</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <!-- Main Content -->
+  <main class="app-main">
+    <div class="container mt-3 pt-4">
+      <h1 class="h4 mb-4">Weather Widget</h1>
+
+      <div class="d-flex gap-2 mb-4">
+        <input id="weatherSearch" class="form-control" placeholder="Search city..." />
+        <button class="btn btn-primary" onclick="Weather.search()">Search</button>
+      </div>
+
+      <div class="row g-3">
+        <!-- Current Weather -->
+        <div class="col-lg-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Current</h5>
+              <div id="weatherCurrent">
+                <p class="text-muted">No data yet.</p>
+              </div>
+              <button class="btn btn-outline-secondary mt-3" onclick="Weather.saveFavorite()">Save Favorite</button>
+              <div class="mt-3">
+                <h6>Favorites</h6>
+                <ul id="favoriteList" class="list-group small"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Forecast -->
+        <div class="col-lg-8">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">5-Day Forecast</h5>
+              <div id="forecast" class="d-flex gap-2 flex-wrap">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<footer class="footer bg-light text-center py-2 sticky-footer">
+  <small>Smart HRMS 2025</small>
+</footer>
+
+</body>
+</html>
